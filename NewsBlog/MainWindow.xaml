@@ -5,8 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NewsBlog"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Name="window"
+        Title="News" Height="500" Width="460" MinHeight="500" MinWidth="460" >
+
+    <Window.Resources>
+        <DataTemplate x:Key="ListBoxItemTemplate">
+            <StackPanel>
+                
+                <Grid  HorizontalAlignment="Stretch">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.2*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+                    <Label FontWeight="Bold"
+                                Content="{Binding PostHeader}" />
+                    <Label Content="{Binding PostDate}"/>
+                </StackPanel>
+                    <Button Grid.Column="1"  
+                            Margin="1"
+                    Command="{Binding DataContext.DeleteCommand, ElementName=window}"
+                    CommandParameter="{Binding}">
+                    ❌
+                </Button>
+                    <Button Grid.Column="2"  
+                            Margin="1" 
+                    Command="{Binding DataContext.EditCommand, ElementName=window}"
+                    CommandParameter="{Binding}">
+                    ✏
+                </Button>
+
+            </Grid>
+                <Separator>
+                    <Separator.Style>
+                        <Style TargetType="Separator">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Separator.Style>
+                </Separator>
+                </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>           
+            <RowDefinition Height="0.08*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.08*" />
+        </Grid.RowDefinitions>
+       
+        <ListBox Grid.Row = "1" 
+                 ItemsSource="{Binding NewsList}"                   
+                 Margin="3"
+                 Name="lbNewsList"
+                 HorizontalAlignment="Stretch"
+                 ItemTemplate="{StaticResource ListBoxItemTemplate}">
+            
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+        </ListBox>
+        <Button Grid.Row = "2"
+                Margin="3"
+                Content="Add new post"
+                Command="{Binding AddCommand}"/>
     </Grid>
 </Window>
