@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace NewsBlog
@@ -27,18 +29,26 @@ namespace NewsBlog
             set => Set(ref input, value);
         }
 
-        //private ToDo selected;
-        //public ToDo Selected
-        //{
-        //    get => selected;
-        //    set => Set(ref selected, value);
-        //}
-
+        NewsBlogContext Entities = new NewsBlogContext();
         public MainWindowViewModel()
         {
-            NewsList.Add(new CollectionItem { PostHeader = "Test", PostDate = DateTime.Now });
-            
+           // NewsList.Add(new CollectionItem { PostHeader = "Test", PostDate = DateTime.Now });
+            Entities.MyCollection.Load();
+            NewsList = Entities.MyCollection.Local;
         }
+
+        private void SaveToDB()
+        {
+            try
+            {
+                Entities.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
 
         private RelayCommand addCommand;
         public RelayCommand AddCommand
@@ -71,7 +81,9 @@ namespace NewsBlog
                 {
                     //var todo = param as ToDo;
                     //todo.Done = !todo.Done;
-                   
+                    var itm = param as CollectionItem;
+                    NewsList.Remove(itm);
+                    SaveToDB();
                 }
             ));
         }
@@ -82,14 +94,13 @@ namespace NewsBlog
             get => editCommand ?? (editCommand = new RelayCommand(
                 param =>
                 {
-                    // WebUtility
                     var itm = param as CollectionItem;
-                    //todo.Done = !todo.Done;
                     AddEditWindow AddWin = new AddEditWindow();
                     AddWin.Title = "Add new post";
                     AddWin.DataContext = this;
                     AddWin.CollItem = itm;
                     AddWin.ShowDialog();
+                    
                 }
             ));
         }
@@ -107,10 +118,13 @@ namespace NewsBlog
                     var be = win.tbPostHeader.GetBindingExpression(TextBox.TextProperty);
                     be.UpdateSource();
                     win.CollItem.HTMLtext = htmlText;
-                    NewsList.Add(win.CollItem);
+                    bool exsist = NewsList.Where(itm => itm == win.CollItem).Any();
+                    if(!exsist)
+                     NewsList.Add(win.CollItem);
 
                     win.Close();
                     InputHeader = "Type header here";
+                    SaveToDB();
                 }
             ));
         }
@@ -275,6 +289,22 @@ namespace NewsBlog
                 param =>
                 {
                     Gui.SettingsAddLink();
+                }
+            ));
+        }
+
+        private RelayCommand showCommand;
+        public RelayCommand ShowCommand
+        {
+            get => showCommand ?? (showCommand = new RelayCommand(
+                param =>
+                {
+                    var itm = param as CollectionItem;
+
+                    var ShowWin = new ShowWindow();
+                    ShowWin.CollecItem = itm;
+                    ShowWin.DataContext = this;
+                    ShowWin.ShowDialog();
                 }
             ));
         }

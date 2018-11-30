@@ -38,66 +38,6 @@ namespace NewsBlog
             InitializeComponent();
         }
 
-        //private void SettingsBold_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.bold();
-        //}
-
-        //private void SettingsItalic_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.Italic();
-        //}
-
-        //private void SettingsUnderLine_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.Underline();
-        //}
-
-        //private void SettingsRightAlign_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.Underline();
-        //}
-
-        //private void SettingsLeftAlign_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.JustifyLeft();
-        //}
-
-        //private void SettingsCenter2_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.JustifyCenter();
-        //}
-
-        //private void SettingsJustifyRight_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.JustifyRight();
-        //}
-
-        //private void SettingsJustifyFull_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.JustifyFull();
-        //}
-
-        //private void SettingsInsertOrderedList_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.InsertOrderedList();
-        //}
-
-        //private void SettingsBullets_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.InsertUnorderedList();
-        //}
-
-        //private void SettingsOutIdent_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.Outdent();
-        //}
-
-        //private void SettingsIdent_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Format.Indent();
-        //}
-
         private void RibbonButtonNew_Click(object sender, RoutedEventArgs e)
         {
             Gui.newdocument();
@@ -112,26 +52,6 @@ namespace NewsBlog
         {
             webBrowserEditor.newWb(@"http://www.github.com/programmistik/");
         }
-
-        //private void SettingsFontColor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Gui.SettingsFontColor();
-        //}
-
-        //private void SettingsBackColor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Gui.SettingsBackColor();
-        //}
-
-        //private void SettingsAddLink_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Gui.SettingsAddLink();
-        //}
-
-        //private void SettingsAddImage_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Gui.SettingsAddImage();
-        //}
 
         private void RibbonButtonSave_Click(object sender, RoutedEventArgs e)
         {
@@ -153,15 +73,6 @@ namespace NewsBlog
             Gui.RibbonComboboxFormat(RibbonComboboxFormat);
         }
 
-        //private void EditWeb_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Gui.EditWeb();
-        //}
-
-        //private void ViewHTML_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Gui.ViewHTML();
-        //}
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -178,20 +89,6 @@ namespace NewsBlog
             Initialisation.RibbonComboboxFontSizeInitialisation();
             Initialisation.RibbonComboboxFormatInitionalisation();
 
-            //HtmlEditor1.Editor.Selection.Text = CollItem.HTMLtext;
-            //webBrowserEditor.webBrowser.Document
-
-            // Gui.webBrowser.doc.documentElement.innerHTML = CollItem.HTMLtext;
-            //NavigateToString(CollItem.HTMLtext);
-
-            //var webBrowser = new WebBrowser();
-            //webBrowserEditor.gridwebBrowser.Children.Add(webBrowser);
-
-            //Script.HideScriptErrors(webBrowser, true);
-            //webBrowser.NavigateToString(CollItem.HTMLtext);
-            //var doc = webBrowser.Document as HTMLDocument;
-            //doc.designMode = "On";
-            //Format.doc = doc;
         }
     }
 }

@@ -8,7 +8,8 @@ namespace NewsBlog
 {
     public class CollectionItem : ObservableObject
     {
-      //  public int Id { get; set; }
+        //
+        public int Id { get; set; }
         //public string PostHeader { get; set; }
         private string header;
         public string PostHeader
