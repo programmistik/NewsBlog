@@ -52,16 +52,16 @@ namespace NewsBlog
             }
         }
 
-        public static void SettingsBackColor()
-        {
-            webBrowser.doc = webBrowser.webBrowser.Document as HTMLDocument;
-            if (webBrowser.doc != null)
-            {
-                System.Windows.Media.Color col = DialogBox.Pick();
-                string colorstr = string.Format("#{0:X2}{1:X2}{2:X2}", col.R, col.G, col.B);
-                webBrowser.doc.body.style.background = colorstr;
-            }
-        }
+        //public static void SettingsBackColor()
+        //{
+        //    webBrowser.doc = webBrowser.webBrowser.Document as HTMLDocument;
+        //    if (webBrowser.doc != null)
+        //    {
+        //        System.Windows.Media.Color col = DialogBox.Pick();
+        //        string colorstr = string.Format("#{0:X2}{1:X2}{2:X2}", col.R, col.G, col.B);
+        //        webBrowser.doc.body.style.background = colorstr;
+        //    }
+        //}
 
         public static void SettingsAddLink()
         {

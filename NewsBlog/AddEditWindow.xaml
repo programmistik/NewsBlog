@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NewsBlog"
         Loaded="Window_Loaded"
+        x:Name="myWindow"
         Title="MainWindow" Height="500" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -46,43 +47,43 @@
                                           Command="{Binding BoldCommand}"/>
                             <RibbonButton x:Name="SettingsItalic" 
                                           SmallImageSource="/NewsBlog;component/Images/italic.png" 
-                                          Click="SettingsItalic_Click"/>
+                                          Command="{Binding ItalicCommand}"/>
                             <RibbonButton x:Name="SettingsUnderLine" 
                                           SmallImageSource="/NewsBlog;component/Images/UnderLine.png" 
-                                          Click="SettingsUnderLine_Click"/>
+                                          Command="{Binding UnderLineCommand}"/>
                             <RibbonButton x:Name="SettingsFontColor" 
                                           SmallImageSource="/NewsBlog;component/Images/Color.png" 
-                                          Click="SettingsFontColor_Click"/>
+                                          Command="{Binding FontColorCommand}"/>
                             <RibbonButton x:Name="SettingsAddLink" 
                                           SmallImageSource="/NewsBlog;component/Images/link.png" 
-                                          Click="SettingsAddLink_Click"/>
+                                          Command="{Binding AddLinkCommand}"/>
                             <RibbonButton x:Name="SettingsAddImage" 
                                           SmallImageSource="/NewsBlog;component/Images/image.png" 
-                                          Click="SettingsAddImage_Click"/>
+                                          Command="{Binding AddImageCommand}"/>
                             <RibbonButton x:Name="SettingsLeftAlign" 
                                           SmallImageSource="/NewsBlog;component/Images/LeftAlign.png" 
-                                          Click="SettingsLeftAlign_Click"/>
+                                          Command="{Binding LeftAlignCommand}"/>
                             <RibbonButton x:Name="SettingsCenter2" 
                                           SmallImageSource="/NewsBlog;component/Images/center2.png" 
-                                          Click="SettingsCenter2_Click"/>
+                                          Command="{Binding Center2Command}"/>
                             <RibbonButton x:Name="SettingsRightAlign" 
                                           SmallImageSource="/NewsBlog;component/Images/RightAlign.png" 
-                                          Click="SettingsJustifyRight_Click"/>
+                                          Command="{Binding RightAlignCommand}"/>
                             <RibbonButton x:Name="SettingsCenter" 
                                           SmallImageSource="/NewsBlog;component/Images/center.png" 
-                                          Click="SettingsJustifyFull_Click"/>
+                                          Command="{Binding CenterCommand}"/>
                             <RibbonButton x:Name="SettingsNumbered" 
                                           SmallImageSource="/NewsBlog;component/Images/Numbered.png" 
-                                          Click="SettingsInsertOrderedList_Click"/>
+                                          Command="{Binding NumberedCommand}"/>
                             <RibbonButton x:Name="SettingsBullets" 
                                           SmallImageSource="/NewsBlog;component/Images/bullets.png" 
-                                          Click="SettingsBullets_Click"/>
+                                          Command="{Binding BulletsCommand}"/>
                             <RibbonButton x:Name="SettingsOutIdent" 
                                           SmallImageSource="/NewsBlog;component/Images/OutIdent.png" 
-                                          Click="SettingsOutIdent_Click"/>
+                                          Command="{Binding OutIdentCommand}"/>
                             <RibbonButton x:Name="SettingsIdent" 
                                           SmallImageSource="/NewsBlog;component/Images/ident.png" 
-                                          Click="SettingsIdent_Click"/>
+                                          Command="{Binding IdentCommand}"/>
                         </StackPanel>
                     </StackPanel>
                 </RibbonGroup>
@@ -92,12 +93,12 @@
                             <RibbonButton x:Name="EditWeb1"  
                                           LargeImageSource="/NewsBlog;component/Images/Editor.png" 
                                           Height="42" HorizontalAlignment="Left" 
-                                          Click="EditWeb_Click"/>
+                                          Command="{Binding EditWeb1Command}"/>
                             <RibbonButton x:Name="ViewHTML"  
                                           LargeImageSource="/NewsBlog;component/Images/html.png" 
                                           Height="42" 
                                           HorizontalAlignment="Left" 
-                                          Click="ViewHTML_Click"/>
+                                          Command="{Binding ViewHTMLCommand}"/>
                         </StackPanel>
                     </StackPanel>
                 </RibbonGroup>
@@ -109,7 +110,8 @@
                                           LargeImageSource="/NewsBlog;component/Images/save.png" 
                                           Height="42" 
                                           HorizontalAlignment="Left" 
-                                          Command="{Binding SaveCommand}"/>
+                                          Command="{Binding SaveCommand}"
+                                          CommandParameter="{Binding ElementName=myWindow}"/>
                         </StackPanel>
                     </StackPanel>
                 </RibbonGroup>
@@ -138,10 +140,16 @@
                 <TextBlock x:Name="lblCursorPosition" Text="Stupid homework :)"/>
             </StatusBarItem>
         </StatusBar>
-        <TextBox Grid.Row="1" Margin="2" Text="{Binding InputHeader, UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox Grid.Row="1" 
+                 Name="tbPostHeader"
+                 Margin="2" 
+                 Text="{Binding Path=CollItem.PostHeader, 
+                            UpdateSourceTrigger=Explicit,
+                            RelativeSource={RelativeSource Mode=FindAncestor,
+                                                         AncestorType=Window}}" 
                  FontSize="18"/>
         <local:WPFWebBrowser x:Name="webBrowserEditor"  Grid.Row="2" />
-        <local:HtmlEditor x:Name="HtmlEditor1"  Grid.Row="1" 
+        <local:HtmlEditor x:Name="HtmlEditor1"  Grid.Row="2" 
                           Visibility="Hidden"
                           />
     </Grid>
