@@ -304,6 +304,7 @@ namespace NewsBlog
                     var ShowWin = new ShowWindow();
                     ShowWin.CollecItem = itm;
                     ShowWin.DataContext = this;
+                    ShowWin.Title = itm.PostHeader;
                     ShowWin.ShowDialog();
                 }
             ));
